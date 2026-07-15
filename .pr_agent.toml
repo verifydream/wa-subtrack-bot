@@ -1,0 +1,29 @@
+# PR-Agent config for wa-subtrack-bot
+# Docs: https://github.com/The-PR-Agent/pr-agent
+
+[config]
+temperature = 0.2
+response_language = "id-ID"
+custom_model_max_tokens = 16384
+
+[pr_reviewer]
+require_tests_review = true
+require_security_review = true
+require_estimate_effort_to_review = true
+num_max_findings = 3
+extra_instructions = """Focus on:
+- Security vulnerabilities (auth, input validation, injection)
+- WhatsApp webhook input sanitization
+- Error handling gaps
+- Code maintainability
+"""
+
+[pr_description]
+generate_ai_title = false
+use_bullet_points = true
+enable_pr_diagram = true
+
+[pr_code_suggestions]
+commitable_code_suggestions = true
+focus_only_on_problems = true
+num_code_suggestions_per_chunk = 3
