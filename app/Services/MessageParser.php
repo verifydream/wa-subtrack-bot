@@ -4,6 +4,12 @@ namespace App\Services;
 
 class MessageParser
 {
+    /**
+     * Parses a natural language text into a structured subscription array.
+     *
+     * @param string $text The incoming message text.
+     * @return array|null The parsed data (service_name, amount, currency, billing_day, notes) or null if invalid.
+     */
     public function parse(string $text): ?array
     {
         $text = trim($text);
@@ -29,6 +35,12 @@ class MessageParser
         ];
     }
 
+    /**
+     * Extracts the service name from the message by removing known keywords and amounts.
+     *
+     * @param string $text The message text.
+     * @return string|null The extracted service name, or null if it cannot be determined.
+     */
     private function extractServiceName(string $text): ?string
     {
         $cleaned = $text;
@@ -48,6 +60,12 @@ class MessageParser
         return ucwords(trim($cleaned));
     }
 
+    /**
+     * Extracts the monetary amount from the message text.
+     *
+     * @param string $text The message text.
+     * @return float|null The extracted amount, or null if none found.
+     */
     private function extractAmount(string $text): ?float
     {
         // USD: "15 dollar" or "$15"
@@ -93,6 +111,12 @@ class MessageParser
         return null;
     }
 
+    /**
+     * Determines the currency based on the text contents.
+     *
+     * @param string $text The message text.
+     * @return string The currency code (USD, EUR, or IDR as default).
+     */
     private function extractCurrency(string $text): string
     {
         if (preg_match('/\$\s*\d/', $text)) {
@@ -107,6 +131,12 @@ class MessageParser
         return 'IDR';
     }
 
+    /**
+     * Extracts the billing day (1-31) from the message text.
+     *
+     * @param string $text The message text.
+     * @return int|null The extracted billing day, or null if not found.
+     */
     private function extractBillingDay(string $text): ?int
     {
         $patterns = [
