@@ -36,6 +36,7 @@ class MessageParser
         $cleaned = preg_replace('/setiap\s*tanggal\s*\d{1,2}/i', '', $cleaned);
         $cleaned = preg_replace('/tanggal\s*\d{1,2}/i', '', $cleaned);
         $cleaned = preg_replace('/tgl\s*\d{1,2}/i', '', $cleaned);
+        $cleaned = preg_replace('/\$\s*\d+[.,]?\d*/i', '', $cleaned);
         $cleaned = preg_replace('/\d+[.,]?\d*\s*(\$|dollar|usd|euro|eur|rb|ribu|k|jt|juta|rp)/i', '', $cleaned);
         $cleaned = preg_replace('/rp\.?\s*\d+[.,]?\d*/i', '', $cleaned);
         $cleaned = preg_replace('/\b\d{4,}\b/', '', $cleaned);
